@@ -12,7 +12,9 @@ mongoose.connect('mongodb://localhost:27017/nombdd', {
 
 
 app.use(express.json());
-
+app.listen(port, () => {
+    console.log(`Serveur démarré sur le port ${port}`);
+});
 
 // Créer un nouvel élément
 app.post('/items', async (req, res) => {
@@ -36,3 +38,4 @@ app.get('/items', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
