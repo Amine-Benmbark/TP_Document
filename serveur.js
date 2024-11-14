@@ -12,3 +12,17 @@ mongoose.connect('mongodb://localhost:27017/nombdd', {
 
 
 app.use(express.json());
+
+
+// Créer un nouvel élément
+app.post('/items', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newItem = new Item(req.body);
+        console.log(newItem);
+        await newItem.save();
+        res.status(201).json(newItem);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
