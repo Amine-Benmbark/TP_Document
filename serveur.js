@@ -13,7 +13,9 @@ mongoose.connect('mongodb://localhost:27017/nombdd', {
 
 // Middleware pour traiter les données JSON
 app.use(express.json());
-
+app.listen(port, () => {
+    console.log(`Serveur démarré sur le port ${port}`);
+});
 
 // Créer un nouvel élément
 app.post('/items', async (req, res) => {
@@ -38,8 +40,3 @@ app.get('/items', async (req, res) => {
     }
 });
 
-
-// Démarrer le serveur
-app.listen(port, () => {
-    console.log(`Serveur démarré sur le port ${port}`);
-});
