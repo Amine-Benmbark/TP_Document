@@ -26,3 +26,13 @@ app.post('/items', async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 });
+
+// Lire tous les éléments
+app.get('/items', async (req, res) => {
+    try {
+        const items = await Item.find();
+        res.json(items);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
