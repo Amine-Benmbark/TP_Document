@@ -40,3 +40,13 @@ app.get('/items', async (req, res) => {
     }
 });
 
+// Supprimer un élément par ID
+app.delete('/items/:id', async (req, res) => {
+    try {
+        const item = await Item.findByIdAndDelete(req.params.id);
+        if (!item) return res.status(404).json({ message: "Élément non trouvé" });
+        res.json({ message: "Élément supprimé avec succès" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
