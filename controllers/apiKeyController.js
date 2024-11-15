@@ -1,6 +1,8 @@
 import ApiKey from '../models/ApiKey.js';
 import { v4 as uuidv4 } from 'uuid';
 import { generateToken } from '../middlewares/jwt.js';
+import logger from '../utils/logger.js';
+
 
 // Ajouter une nouvelle API Key
 export const addApiKey = async (req, res) => {
@@ -13,6 +15,7 @@ export const addApiKey = async (req, res) => {
 
     res.status(201).json({ apiKey: newApiKey.key });
   } catch (error) {
+    logger.error("Erreur lors de la création de la clé API", error);
     res.status(500).json({ message: 'Erreur lors de la création de la clé API' });
   }
 };
@@ -36,6 +39,7 @@ export const authenticateApiKey = async (req, res) => {
 
     res.json({ token });
   } catch (error) {
+    logger.error('Erreur lors de l\'authentification de la clé API', error);
     res.status(500).json({ message: 'Erreur lors de l\'authentification de la clé API' });
   }
 };
