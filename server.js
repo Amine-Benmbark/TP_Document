@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
-import itemRoutes from './routes/itemRoutes.js';
+import routes from './routes/index.js'
 
 dotenv.config();
 
@@ -14,8 +14,7 @@ connectDB();
 // Middleware
 app.use(bodyParser.json());
 
-// Routes
-app.use('/api', itemRoutes);
+app.use(routes); 
 
 // Démarrer le serveur
 const PORT = process.env.PORT || 5000;

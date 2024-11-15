@@ -1,12 +1,14 @@
 import express from 'express';
 import {createItem, getItemById, getItems, updateItem, deleteItem } from '../controllers/itemController.js';
+import verifyJwt from '../middlewares/jwt.js';
+
 
 const router = express.Router();
 
-router.post('/items', createItem);
-router.get('/items', getItems);
-router.get('/items/:id', getItemById);
-router.put('/items/:id', updateItem);
-router.delete('/items/:id', deleteItem);
+router.post('/', verifyJwt, createItem);
+router.get('/', verifyJwt, getItems);
+router.get('/:id', verifyJwt, getItemById);
+router.put('/:id', verifyJwt, updateItem);
+router.delete('/:id', verifyJwt, deleteItem);
 
 export default router;
