@@ -1,8 +1,10 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const connectDB = require('./config/db');
-const itemRoutes = require('./routes/itemRoutes');
-require('dotenv').config();
+import express from 'express';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+import connectDB from './config/db.js';
+import itemRoutes from './routes/itemRoutes.js';
+
+dotenv.config();
 
 const app = express();
 
