@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-const verifyJwt = (req, res, next) => {
+export const verifyJwt = (req, res, next) => {
   const token = req.headers['authorization']?.split(' ')[1];
 
   if (!token) {
@@ -16,4 +16,24 @@ const verifyJwt = (req, res, next) => {
   }
 };
 
-export default verifyJwt;
+export const generateToken = (apiKey) => {
+    try {
+
+      if (!apiKey) {
+        throw new Error("API Key manquante");
+      }
+  
+      // Signer le JWT
+      const token = jwt.sign(
+        { apiKey: apiKey }, 
+        process.env.JWT_SECRET, 
+        { expiresIn: '12h' } 
+      );
+  
+      return token;
+  
+    } catch (error) {
+      console.error('Erreur lors de la génération du token', error);
+      throw error;
+    }
+  };

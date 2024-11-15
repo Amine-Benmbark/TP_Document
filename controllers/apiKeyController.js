@@ -1,6 +1,6 @@
 import ApiKey from '../models/ApiKey.js';
-import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
+import { generateToken } from '../middlewares/jwt.js';
 
 // Ajouter une nouvelle API Key
 export const addApiKey = async (req, res) => {
@@ -32,11 +32,7 @@ export const authenticateApiKey = async (req, res) => {
       return res.status(401).json({ message: 'Clé API invalide' });
     }
 
-    const token = jwt.sign(
-      { apiKey: keyRecord.key },
-      process.env.JWT_SECRET,
-      { expiresIn: '12h' }
-    );
+    const token = generateToken(apiKey);
 
     res.json({ token });
   } catch (error) {

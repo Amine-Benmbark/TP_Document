@@ -1,6 +1,6 @@
 import express from 'express';
 import { addApiKey, authenticateApiKey } from '../controllers/apiKeyController.js';
-import verifyJwt from '../middlewares/jwt.js';
+import {verifyJwt} from '../middlewares/jwt.js';
 
 const router = express.Router();
 
